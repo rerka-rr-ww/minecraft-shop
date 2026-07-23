@@ -70,14 +70,14 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        .armor-column, .tools-column, .food-column {
+        .armor-column, .tools-column, .food-column, .special-column {
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
         @media (max-width: 768px) {
             .shop-container { flex-direction: column; align-items: center; gap: 30px; }
-            .armor-column, .tools-column, .food-column { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+            .armor-column, .tools-column, .food-column, .special-column { flex-direction: row; flex-wrap: wrap; justify-content: center; }
         }
         .icon-card {
             background: #8b8b8b;
@@ -196,6 +196,21 @@
                 </div>
                 <div class="icon-card" onclick="selectItem('<img src=\'Bread_JE3_BE3.png\'>', 'Хлеб', 3, 'bread')">
                     <img src="Bread_JE3_BE3.png" alt="Хлеб">
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="section-title">Особые предметы</div>
+            <div class="special-column">
+                <div class="icon-card" onclick="selectItem('<img src=\'Totem_of_Undying_JE2_BE2.png\'>', 'Тотем бессмертия', 75, 'totem')">
+                    <img src="Totem_of_Undying_JE2_BE2.png" alt="Тотем бессмертия">
+                </div>
+                <div class="icon-card" onclick="selectItem('<img src=\'Wind_Charge_(item)_JE1_BE1.png\'>', 'Заряд ветра', 4, 'windcharge')">
+                    <img src="Wind_Charge_(item)_JE1_BE1.png" alt="Заряд ветра">
+                </div>
+                <div class="icon-card" onclick="selectItem('<img src=\'Block_of_Iron_JE4_BE3.png\'>', 'Железный блок', 12, 'ironblock')">
+                    <img src="Block_of_Iron_JE4_BE3.png" alt="Железный блок">
                 </div>
             </div>
         </div>
