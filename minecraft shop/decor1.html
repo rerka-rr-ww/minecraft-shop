@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Склад выдачи</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #2c2c2c;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            margin: 0;
+        }
+        h1 {
+            color: #ffff55;
+            text-shadow: 2px 2px #555500;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #aaaaaa;
+            margin-bottom: 40px;
+        }
+        .barrel-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 150px);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        @media (max-width: 700px) {
+            .barrel-grid {
+                grid-template-columns: repeat(2, 150px);
+            }
+        }
+        .barrel-card {
+            background: #4a4a4a;
+            border: 4px solid #1a1a1a;
+            border-radius: 4px;
+            padding: 20px 15px 15px 15px;
+            text-align: center;
+            position: relative;
+            box-shadow: inset 3px 3px 0 #8b8b8b;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        .barrel-card:hover {
+            background: #555555;
+            transform: scale(1.02);
+        }
+        .barrel-number {
+            position: absolute;
+            top: 6px;
+            left: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #aaaaaa;
+            text-shadow: 1px 1px #000000;
+        }
+        .barrel-icon img {
+            width: 54px;
+            height: 54px;
+            image-rendering: pixelated;
+            margin-bottom: 5px;
+        }
+        .item-inside {
+            opacity: 0.7;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .item-inside img {
+            width: 40px;
+            height: 40px;
+            image-rendering: pixelated;
+            vertical-align: middle;
+        }
+        .barrel-card.highlighted {
+            border-color: #55ffff;
+            background: #3a5555;
+            box-shadow: 0 0 20px #55ffff, inset 3px 3px 0 #8b8b8b;
+            transform: scale(1.05);
+        }
+        .barrel-card.highlighted:hover {
+            background: #446666;
+        }
+        .barrel-card.highlighted .barrel-number {
+            color: #55ffff;
+        }
+        .barrel-card.highlighted .item-inside {
+            opacity: 1;
+            animation: pulse 1.5s infinite alternate;
+        }
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.2); }
+        }
+        .btn-back {
+            display: inline-block;
+            min-width: 250px;
+            padding: 12px 25px;
+            background: #a8a8a8;
+            border: 4px solid #000000;
+            border-top-color: #ffffff;
+            border-left-color: #ffffff;
+            color: #ffffff;
+            text-shadow: 1px 1px #000000;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 0 #1a1a1a;
+            transition: all 0.1s;
+        }
+        .btn-back:hover {
+            background: #55ffff;
+            color: #000000;
+            text-shadow: none;
+        }
+        .btn-back:active {
+            border-top-color: #000000;
+            border-left-color: #000000;
+            border-bottom-color: #ffffff;
+            border-right-color: #ffffff;
+            box-shadow: none;
+            transform: translateY(4px);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Склад товаров</h1>
+    <p id="status-message">Поиск вашей бочки...</p>
+
+    <div class="barrel-grid">
+        <div class="barrel-card" id="barrel-helmet" onclick="goToInfo('helmet')">
+            <div class="barrel-number">#1</div>
+            <div class="barrel-icon"><img src="Barrel_(U)_JE1_BE1.png" alt="Бочка"></div>
+            <div class="item-inside"><img src="helmet.png.png" alt="Шлем"></div>
+        </div>
+        <div class="barrel-card" id="barrel-chestplate" onclick="goToInfo('chestplate')">
+            <div class="barrel-number">#2</div>
+            <div class="barrel-icon"><img src="Barrel_(U)_JE1_BE1.png" alt="Бочка"></div>
+            <div class="item-inside"><img src="chestplate.png.png" alt="Нагрудник"></div>
+        </div>
+        <div class="barrel-card" id="barrel-leggings" onclick="goToInfo('leggings')">
+            <div class="barrel-number">#3</div>
+            <div class="barrel-icon"><img src="Barrel_(U)_JE1_BE1.png" alt="Бочка"></div>
+            <div class="item-inside"><img src="leggings.png.png" alt="Штаны"></div>
+        </div>
+        <div class="barrel-card" id="barrel-boots" onclick="goToInfo('boots')">
+            <div class="barrel-number">#4</div>
+            <div class="barrel-icon"><img src="Barrel_(U)_JE1_BE1.png" alt="Бочка"></div>
+            <div class="item-inside"><img src="boots.png.png" alt="Ботинки"></div>
+        </div>
+
+        <div class="barrel-card" id="barrel-sword" onclick="goToInfo('sword')">
+            <div class="barrel-number">#5</div>
+            <div class="barrel-icon"><img src="Barrel_(U)_JE1_BE1.png" alt="Бочка"></div>
+            <div class="item-inside"><img src="sword.png.png" alt="Меч"></div>
+        </div>
+        <div class="barrel-card" id="barrel-pickaxe" onclick="goToInfo('pickaxe')">
+            <div class="barrel-number">#6</div>
+            <div class="barrel-icon"><img src="Barrel_(U)_JE1_BE1.png" alt="Бочка"></div>
+            <div class="item-inside"><img src="pickaxe.png.png" alt="Кирка"></div>
+        </div>
+        <div class="barrel-card" id="barrel-axe" onclick="goToInfo('axe')">
+            <div class="barrel-number">#7</div>
+            <div class="barrel-icon"><img src="Barrel_(U)_JE1_BE1.png" alt="Бочка"></div>
+            <div class="item-inside"><img src="axe.png.png" alt="Топор"></div>
+        </div>
+
+        <div class="barrel-card" id="barrel-gapple" onclick="goToInfo('gapple')">
+            <div class="barrel-number">#8</div>
+            <div class="barrel-icon"><img src="Barrel_(U)_JE1_BE1.png" alt="Бочка"></div>
+            <div class="item-inside"><img src="Golden_Apple_JE2_BE2.png" alt="Золотое яблоко"></div>
+        </div>
+        <div class="barrel-card" id="barrel-carrot" onclick="goToInfo('carrot')">
+            <div class="barrel-number">#9</div>
+            <div class="barrel-icon"><img src="Barrel_(U)_JE1_BE1.png" alt="Бочка"></div>
+            <div class="item-inside"><img src="Golden_Carrot_JE4_BE2.png" alt="Золотая морковь"></div>
+        </div>
+        <div class="barrel-card" id="barrel-steak" onclick="goToInfo('steak')">
+            <div class="barrel-number">#10</div>
+            <div class="barrel-icon"><img src="Barrel_(U)_JE1_BE1.png" alt="Бочка"></div>
+            <div class="item-inside"><img src="Steak_JE4_BE3.png" alt="Стейк"></div>
+        </div>
+        <div class="barrel-card" id="barrel-bread" onclick="goToInfo('bread')">
+            <div class="barrel-number">#11</div>
+            <div class="barrel-icon"><img src="Barrel_(U)_JE1_BE1.png" alt="Бочка"></div>
+            <div class="item-inside"><img src="Bread_JE3_BE3.png" alt="Хлеб"></div>
+        </div>
+    </div>
+
+    <a href="index1.html" class="btn-back">ВЕРНУТЬСЯ В МАГАЗИН</a>
+
+    <script>
+        function goToInfo(itemId) {
+            window.location.href = "info1.html?item=" + itemId;
+        }
+
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        const chosenItem = getQueryParam('item');
+
+        if (chosenItem) {
+            const targetBarrel = document.getElementById('barrel-' + chosenItem);
+            if (targetBarrel) {
+                targetBarrel.classList.add('highlighted');
+                const num = targetBarrel.querySelector('.barrel-number').innerText;
+                document.getElementById('status-message').innerText = "Товар найден! Ваша бочка " + num + " подсвечена. Нажмите на неё.";
+                document.getElementById('status-message').style.color = "#55ff55";
+            } else {
+                document.getElementById('status-message').innerText = "Товар не найден на складе.";
+                document.getElementById('status-message').style.color = "#ff5555";
+            }
+        } else {
+            document.getElementById('status-message').innerText = "Вы перешли на склад без выбранного товара. Но вы можете осмотреть бочки.";
+        }
+    </script>
+</body>
+</html>
+
+
