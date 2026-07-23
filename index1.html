@@ -33,6 +33,29 @@
             text-align: center;
             margin: 0;
         }
+        .cart-status-bar {
+            background: #1a1a1a;
+            border: 2px solid #373737;
+            padding: 10px 20px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            font-size: 16px;
+            color: #ffff55;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .btn-go-cart {
+            background: #55ff55;
+            color: #000000;
+            border: 2px solid #005500;
+            padding: 4px 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .btn-go-cart:hover { background: #aaffaa; }
         .shop-container {
             display: flex;
             gap: 40px;
@@ -53,16 +76,8 @@
             gap: 15px;
         }
         @media (max-width: 768px) {
-            .shop-container {
-                flex-direction: column;
-                align-items: center;
-                gap: 30px;
-            }
-            .armor-column, .tools-column, .food-column {
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
+            .shop-container { flex-direction: column; align-items: center; gap: 30px; }
+            .armor-column, .tools-column, .food-column { flex-direction: row; flex-wrap: wrap; justify-content: center; }
         }
         .icon-card {
             background: #8b8b8b;
@@ -79,21 +94,9 @@
             transition: background 0.1s;
             user-select: none;
         }
-        .icon-card img {
-            width: 64px;
-            height: 64px;
-            image-rendering: pixelated;
-        }
-        .icon-card:hover {
-            background: #a8a8a8;
-            border-color: #55ffff;
-        }
-        .icon-card:active {
-            border-top-color: #373737;
-            border-left-color: #373737;
-            border-bottom-color: #ffffff;
-            border-right-color: #ffffff;
-        }
+        .icon-card img { width: 64px; height: 64px; image-rendering: pixelated; }
+        .icon-card:hover { background: #a8a8a8; border-color: #55ffff; }
+        .icon-card:active { border-top-color: #373737; border-left-color: #373737; border-bottom-color: #ffffff; border-right-color: #ffffff; }
         .display-panel {
             padding: 25px;
             background: #4a4a4a;
@@ -104,23 +107,9 @@
             box-shadow: inset 3px 3px 0 #8b8b8b;
             margin-bottom: 20px;
         }
-        #item-name {
-            margin: 0 0 15px 0;
-            color: #ffff55;
-            text-shadow: 1px 1px #555500;
-        }
-        #item-name img {
-            width: 30px;
-            height: 30px;
-            vertical-align: middle;
-            image-rendering: pixelated;
-        }
-        #price-text {
-            font-size: 28px;
-            font-weight: bold;
-            color: #55ff55;
-            text-shadow: 1px 1px #005500;
-        }
+        #item-name { margin: 0 0 15px 0; color: #ffff55; text-shadow: 1px 1px #555500; }
+        #item-name img { width: 30px; height: 30px; vertical-align: middle; image-rendering: pixelated; }
+        #price-text { font-size: 28px; font-weight: bold; color: #55ff55; text-shadow: 1px 1px #005500; }
         .btn-buy {
             display: inline-block;
             min-width: 350px;
@@ -141,26 +130,9 @@
             opacity: 0.5;
             transition: all 0.1s;
         }
-        .btn-buy.active {
-            background: #4a4a4a;
-            color: #ffffff;
-            cursor: pointer;
-            opacity: 1;
-        }
-        .btn-buy.active:hover {
-            background: #55ffff;
-            color: #000000;
-            border-top-color: #ffffff;
-            border-left-color: #ffffff;
-        }
-        .btn-buy.active:active {
-            border-top-color: #000000;
-            border-left-color: #000000;
-            border-bottom-color: #ffffff;
-            border-right-color: #ffffff;
-            box-shadow: none;
-            transform: translateY(4px);
-        }
+        .btn-buy.active { background: #4a4a4a; color: #ffffff; cursor: pointer; opacity: 1; }
+        .btn-buy.active:hover { background: #55ffff; color: #000000; border-top-color: #ffffff; border-left-color: #ffffff; }
+        .btn-buy.active:active { border-top-color: #000000; border-left-color: #000000; border-bottom-color: #ffffff; border-right-color: #ffffff; box-shadow: none; transform: translateY(4px); }
     </style>
 </head>
 <body>
@@ -170,20 +142,26 @@
         <h1>Магазин снаряжения</h1>
     </div>
 
+    <!-- Информационная панель корзины сверху витрины -->
+    <div class="cart-status-bar">
+        <span>Товаров в корзине: <strong id="cart-count">0</strong></span>
+        <a href="cart1.html" class="btn-go-cart">ПЕРЕЙТИ В КОРЗИНУ</a>
+    </div>
+
     <div class="shop-container">
         <div>
             <div class="section-title">Броня</div>
             <div class="armor-column">
-                <div class="icon-card" onclick="showPrice('<img src=\'helmet.png.png\'>', 'Алмазный шлем', '16 ар', 'helmet')">
+                <div class="icon-card" onclick="selectItem('<img src=\'helmet.png.png\'>', 'Алмазный шлем', 16, 'helmet')">
                     <img src="helmet.png.png" alt="Шлем">
                 </div>
-                <div class="icon-card" onclick="showPrice('<img src=\'chestplate.png.png\'>', 'Алмазный нагрудник', '20 ар', 'chestplate')">
+                <div class="icon-card" onclick="selectItem('<img src=\'chestplate.png.png\'>', 'Алмазный нагрудник', 20, 'chestplate')">
                     <img src="chestplate.png.png" alt="Нагрудник">
                 </div>
-                <div class="icon-card" onclick="showPrice('<img src=\'leggings.png.png\'>', 'Алмазные штаны', '18 ар', 'leggings')">
+                <div class="icon-card" onclick="selectItem('<img src=\'leggings.png.png\'>', 'Алманые штаны', 18, 'leggings')">
                     <img src="leggings.png.png" alt="Штаны">
                 </div>
-                <div class="icon-card" onclick="showPrice('<img src=\'boots.png.png\'>', 'Алмазные ботинки', '17 ар', 'boots')">
+                <div class="icon-card" onclick="selectItem('<img src=\'boots.png.png\'>', 'Алмазные ботинки', 17, 'boots')">
                     <img src="boots.png.png" alt="Ботинки">
                 </div>
             </div>
@@ -192,13 +170,13 @@
         <div>
             <div class="section-title">Оружие / Инструменты</div>
             <div class="tools-column">
-                <div class="icon-card" onclick="showPrice('<img src=\'sword.png.png\'>', 'Алмазный меч', '20 ар', 'sword')">
+                <div class="icon-card" onclick="selectItem('<img src=\'sword.png.png\'>', 'Алмазный меч', 20, 'sword')">
                     <img src="sword.png.png" alt="Меч">
                 </div>
-                <div class="icon-card" onclick="showPrice('<img src=\'pickaxe.png.png\'>', 'Алматная кирка', '15 ар', 'pickaxe')">
+                <div class="icon-card" onclick="showPrice('<img src=\'pickaxe.png.png\'>', 'Алмазная кирка', 15, 'pickaxe')">
                     <img src="pickaxe.png.png" alt="Кирка">
                 </div>
-                <div class="icon-card" onclick="showPrice('<img src=\'axe.png.png\'>', 'Алмазный топор', '13 ар', 'axe')">
+                <div class="icon-card" onclick="selectItem('<img src=\'axe.png.png\'>', 'Алмазный топор', 13, 'axe')">
                     <img src="axe.png.png" alt="Топор">
                 </div>
             </div>
@@ -207,16 +185,16 @@
         <div>
             <div class="section-title">Еда</div>
             <div class="food-column">
-                <div class="icon-card" onclick="showPrice('<img src=\'Golden_Apple_JE2_BE2.png\'>', 'Золотое яблоко', '64 ар', 'gapple')">
+                <div class="icon-card" onclick="selectItem('<img src=\'Golden_Apple_JE2_BE2.png\'>', 'Золотое яблоко', 64, 'gapple')">
                     <img src="Golden_Apple_JE2_BE2.png" alt="Золотое яблоко">
                 </div>
-                <div class="icon-card" onclick="showPrice('<img src=\'Golden_Carrot_JE4_BE2.png\'>', 'Золотая морковь', '18 ар', 'carrot')">
+                <div class="icon-card" onclick="selectItem('<img src=\'Golden_Carrot_JE4_BE2.png\'>', 'Золотая морковь', 18, 'carrot')">
                     <img src="Golden_Carrot_JE4_BE2.png" alt="Золотая морковь">
                 </div>
-                <div class="icon-card" onclick="showPrice('<img src=\'Steak_JE4_BE3.png\'>', 'Стейк', '5 ар', 'steak')">
+                <div class="icon-card" onclick="selectItem('<img src=\'Steak_JE4_BE3.png\'>', 'Стейк', 5, 'steak')">
                     <img src="Steak_JE4_BE3.png" alt="Стейк">
                 </div>
-                <div class="icon-card" onclick="showPrice('<img src=\'Bread_JE3_BE3.png\'>', 'Хлеб', '3 ар', 'bread')">
+                <div class="icon-card" onclick="selectItem('<img src=\'Bread_JE3_BE3.png\'>', 'Хлеб', 3, 'bread')">
                     <img src="Bread_JE3_BE3.png" alt="Хлеб">
                 </div>
             </div>
@@ -228,29 +206,49 @@
         <div id="price-text">—</div>
     </div>
 
-    <a href="#" id="buy-button" class="btn-buy" onclick="checkSelection(event)">КУПИТЬ</a>
+    <!-- Изменено на кнопку «В КОРЗИНУ» -->
+    <button id="buy-button" class="btn-buy" onclick="addToCart()">В КОРЗИНУ</button>
 
     <script>
-        let isItemSelected = false;
+        let currentItem = null;
 
-        function showPrice(iconHtml, name, price, itemId) {
+        // Инициализация счетчика при загрузке страницы
+        updateCartBadge();
+
+        function selectItem(iconHtml, name, price, itemId) {
             document.getElementById('item-name').innerHTML = iconHtml + " " + name;
-            document.getElementById('price-text').innerText = price;
+            document.getElementById('price-text').innerText = price + " ар";
             
-            isItemSelected = true;
+            currentItem = { icon: iconHtml, name: name, price: price, id: itemId };
+            
             const buyBtn = document.getElementById('buy-button');
             buyBtn.classList.add('active');
-            buyBtn.href = "decor1.html?item=" + itemId; 
         }
 
-        function checkSelection(event) {
-            if (!isItemSelected) {
-                event.preventDefault();
-            }
+        function addToCart() {
+            if (!currentItem) return;
+
+            // Получаем старый массив из памяти или создаем пустой
+            let cart = JSON.parse(localStorage.getItem('metal_hub_cart')) || [];
+            
+            // Добавляем новый предмет
+            cart.push(currentItem);
+            
+            // Сохраняем обратно в память браузера
+            localStorage.setItem('metal_hub_cart', JSON.stringify(cart));
+            
+            updateCartBadge();
+            alert(currentItem.name + " добавлен в корзину!");
+        }
+
+        function updateCartBadge() {
+            let cart = JSON.parse(localStorage.getItem('metal_hub_cart')) || [];
+            document.getElementById('cart-count').innerText = cart.length;
         }
     </script>
 </body>
 </html>
+
 
 
 

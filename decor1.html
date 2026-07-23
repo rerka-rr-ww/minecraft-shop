@@ -21,33 +21,11 @@
             gap: 15px;
             margin-bottom: 10px;
         }
-        .main-logo {
-            width: 140px;
-            height: auto;
-            image-rendering: pixelated;
-            object-fit: contain;
-        }
-        h1 {
-            color: #ffff55;
-            text-shadow: 2px 2px #555500;
-            text-align: center;
-            margin: 0;
-        }
-        p {
-            color: #aaaaaa;
-            margin-bottom: 40px;
-        }
-        .barrel-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 150px);
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-        @media (max-width: 700px) {
-            .barrel-grid {
-                grid-template-columns: repeat(2, 150px);
-            }
-        }
+        .main-logo { width: 140px; height: auto; image-rendering: pixelated; object-fit: contain; }
+        h1 { color: #ffff55; text-shadow: 2px 2px #555500; text-align: center; margin: 0; }
+        p { color: #aaaaaa; margin-bottom: 40px; }
+        .barrel-grid { display: grid; grid-template-columns: repeat(4, 150px); gap: 25px; margin-bottom: 40px; }
+        @media (max-width: 700px) { .barrel-grid { grid-template-columns: repeat(2, 150px); } }
         .barrel-card {
             background: #4a4a4a;
             border: 4px solid #1a1a1a;
@@ -59,15 +37,14 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
+        /* 🔵 СИНЯЯ подсветка при наведении */
         .barrel-card:hover {
             background: #3a4455;
             border-color: #55aaff;
             box-shadow: 0 0 15px #55aaff, inset 3px 3px 0 #8b8b8b;
             transform: scale(1.05);
         }
-        .barrel-card:hover .barrel-number {
-            color: #55aaff;
-        }
+        .barrel-card:hover .barrel-number { color: #55aaff; }
         .barrel-number {
             position: absolute;
             top: 6px;
@@ -78,43 +55,19 @@
             text-shadow: 1px 1px #000000;
             transition: color 0.2s;
         }
-        .barrel-icon img {
-            width: 54px;
-            height: 54px;
-            image-rendering: pixelated;
-            margin-bottom: 5px;
-        }
-        .item-inside {
-            opacity: 0.7;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.2s;
-        }
-        .item-inside img {
-            width: 40px;
-            height: 40px;
-            image-rendering: pixelated;
-            vertical-align: middle;
-        }
+        .barrel-icon img { width: 54px; height: 54px; image-rendering: pixelated; margin-bottom: 5px; }
+        .item-inside { opacity: 0.7; height: 40px; display: flex; align-items: center; justify-content: center; transition: opacity 0.2s; }
+        .item-inside img { width: 40px; height: 40px; image-rendering: pixelated; vertical-align: middle; }
+        /* 🔴 КРАСНАЯ подсветка для всех выбранных бочек */
         .barrel-card.highlighted {
             border-color: #ff5555 !important; 
             background: #553a3a !important;
             box-shadow: 0 0 25px #ff5555, inset 3px 3px 0 #8b8b8b !important;
             transform: scale(1.05);
         }
-        .barrel-card.highlighted .barrel-number {
-            color: #ff5555;
-        }
-        .barrel-card.highlighted .item-inside {
-            opacity: 1;
-            animation: pulse 1.5s infinite alternate;
-        }
-        @keyframes pulse {
-            from { transform: scale(1); }
-            to { transform: scale(1.2); }
-        }
+        .barrel-card.highlighted .barrel-number { color: #ff5555; }
+        .barrel-card.highlighted .item-inside { opacity: 1; animation: pulse 1.5s infinite alternate; }
+        @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.2); } }
         .btn-back {
             display: inline-block;
             min-width: 250px;
@@ -131,19 +84,8 @@
             box-shadow: 0 4px 0 #1a1a1a;
             transition: all 0.1s;
         }
-        .btn-back:hover {
-            background: #55ffff;
-            color: #000000;
-            text-shadow: none;
-        }
-        .btn-back:active {
-            border-top-color: #000000;
-            border-left-color: #000000;
-            border-bottom-color: #ffffff;
-            border-right-color: #ffffff;
-            box-shadow: none;
-            transform: translateY(4px);
-        }
+        .btn-back:hover { background: #55ffff; color: #000000; text-shadow: none; }
+        .btn-back:active { border-top-color: #000000; border-left-color: #000000; border-bottom-color: #ffffff; border-right-color: #ffffff; box-shadow: none; transform: translateY(4px); }
     </style>
 </head>
 <body>
@@ -214,7 +156,7 @@
         </div>
     </div>
 
-    <a href="index1.html" class="btn-back">ВЕРНУТЬСЯ В МАГАЗИН</a>
+    <a href="cart1.html" class="btn-back">ВЕРНУТЬСЯ В КОРЗИНУ</a>
 
     <script>
         function goToInfo(itemId) {
@@ -226,17 +168,22 @@
             return urlParams.get(param);
         }
 
-        const chosenItem = getQueryParam('item');
+        const chosenItemsString = getQueryParam('items');
 
-        if (chosenItem) {
-            const targetBarrel = document.getElementById('barrel-' + chosenItem);
-            if (targetBarrel) {
-                targetBarrel.classList.add('highlighted');
-                const num = targetBarrel.querySelector('.barrel-number').innerText;
-                document.getElementById('status-message').innerText = "Товар найден! Ваша бочка " + num + " подсвечена. Нажмите на неё.";
-                document.getElementById('status-message').style.color = "#55ff55";
-            } else {
-                document.getElementById('status-message').innerText = "Товар не найден на складе.";
+        if (chosenItemsString) {
+            const itemIdsArray = chosenItemsString.split(',');
+            let highlightedCount = 0;
+
+            itemIdsArray.forEach(id => {
+                const targetBarrel = document.getElementById('barrel-' + id);
+                if (targetBarrel) {
+                    targetBarrel.classList.add('highlighted');
+                    highlightedCount++;
+                }
+            });
+
+            if (highlightedCount > 0) {
+                document.getElementById('status-message').innerText = "Заказ принят! Бочки с вашими товарами (" + highlightedCount + " шт.) подсвечены красным.";
                 document.getElementById('status-message').style.color = "#ff5555";
             }
         } else {
@@ -245,9 +192,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-

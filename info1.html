@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Информация о товаре</title>
+    <title>METAL HUB — Информация о товаре</title>
     <style>
         body {
             font-family: 'Courier New', Courier, monospace;
@@ -15,12 +15,14 @@
             padding: 40px;
             margin: 0;
         }
-        h1 {
-            color: #55ffff;
-            text-shadow: 2px 2px #005555;
-            text-align: center;
-            margin-bottom: 30px;
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
         }
+        .main-logo { width: 140px; height: auto; image-rendering: pixelated; object-fit: contain; }
+        h1 { color: #55ffff; text-shadow: 2px 2px #005555; text-align: center; margin: 0; }
         .info-panel {
             background: #4a4a4a;
             border: 4px solid #1a1a1a;
@@ -31,56 +33,14 @@
             box-shadow: inset 3px 3px 0 #8b8b8b;
             margin-bottom: 40px;
         }
-        .header-panel {
-            text-align: center;
-            margin-bottom: 25px;
-            border-bottom: 4px dashed #373737;
-            padding-bottom: 15px;
-        }
-        .large-icon {
-            font-size: 70px;
-            margin-bottom: 10px;
-        }
-        .large-icon img {
-            width: 80px;
-            height: 80px;
-            image-rendering: pixelated;
-        }
-        .info-title {
-            color: #ffff55;
-            font-size: 26px;
-            margin: 0;
-            text-shadow: 1px 1px #555500;
-        }
-        .point-card {
-            background: #333333;
-            border: 3px solid #1a1a1a;
-            border-radius: 4px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: inset 2px 2px 0 #555555;
-        }
-        .point-name {
-            font-size: 18px;
-            font-weight: bold;
-            color: #ffff55;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
-        .point-data {
-            font-size: 16px;
-            margin: 5px 0;
-            color: #e0e0e0;
-        }
-        .data-value {
-            font-weight: bold;
-            color: #55ff55;
-            text-shadow: 1px 1px #005500;
-        }
-        .data-value.low-stock {
-            color: #ff5555;
-            text-shadow: 1px 1px #550000;
-        }
+        .header-panel { text-align: center; margin-bottom: 25px; border-bottom: 4px dashed #373737; padding-bottom: 15px; }
+        .large-icon img { width: 80px; height: 80px; image-rendering: pixelated; }
+        .info-title { color: #ffff55; font-size: 26px; margin: 0; text-shadow: 1px 1px #555500; }
+        .point-card { background: #333333; border: 3px solid #1a1a1a; border-radius: 4px; padding: 15px; margin-bottom: 15px; box-shadow: inset 2px 2px 0 #555555; }
+        .point-name { font-size: 18px; font-weight: bold; color: #ffff55; margin-bottom: 8px; text-transform: uppercase; }
+        .point-data { font-size: 16px; margin: 5px 0; color: #e0e0e0; }
+        .data-value { font-weight: bold; color: #55ff55; text-shadow: 1px 1px #005500; }
+        .data-value.low-stock { color: #ff5555; text-shadow: 1px 1px #550000; }
         .btn-back {
             display: inline-block;
             min-width: 250px;
@@ -97,31 +57,22 @@
             box-shadow: 0 4px 0 #1a1a1a;
             transition: all 0.1s;
         }
-        .btn-back:hover {
-            background: #ffff55;
-            color: #000000;
-            text-shadow: none;
-        }
-        .btn-back:active {
-            border-top-color: #000000;
-            border-left-color: #000000;
-            border-bottom-color: #ffffff;
-            border-right-color: #ffffff;
-            box-shadow: none;
-            transform: translateY(4px);
-        }
+        .btn-back:hover { background: #ffff55; color: #000000; text-shadow: none; }
+        .btn-back:active { border-top-color: #000000; border-left-color: #000000; border-bottom-color: #ffffff; border-right-color: #ffffff; box-shadow: none; transform: translateY(4px); }
     </style>
 </head>
 <body>
 
-    <h1>Учёт запасов по точкам</h1>
+    <div class="logo-container">
+        <img src="MetalHub.png" alt="METAL HUB" class="main-logo">
+        <h1>Учёт запасов</h1>
+    </div>
 
     <div class="info-panel">
         <div class="header-panel">
             <div class="large-icon" id="item-icon">❓</div>
             <h2 class="info-title" id="item-title">Загрузка...</h2>
         </div>
-        
         <div id="points-container"></div>
     </div>
 
@@ -246,8 +197,10 @@
             });
         } else {
             document.getElementById('item-title').innerText = "Товар отсутствует";
-            container.innerHTML = `<div style="text-align:center; color:#ff5555;">Данные не найдены</div>`;
+            container.innerHTML = `<div style="text-align:center; color:#ff5555;">Пожалуйста, перейдите на эту страницу со склада.</div>`;
         }
     </script>
 </body>
 </html>
+
+
