@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Склад выдачи</title>
+    <title>METAL HUB — Склад выдачи</title>
     <style>
         body {
             font-family: 'Courier New', Courier, monospace;
@@ -15,11 +15,23 @@
             padding: 40px;
             margin: 0;
         }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        .main-logo {
+            width: 140px;
+            height: auto;
+            image-rendering: pixelated;
+            object-fit: contain;
+        }
         h1 {
             color: #ffff55;
             text-shadow: 2px 2px #555500;
             text-align: center;
-            margin-bottom: 10px;
+            margin: 0;
         }
         p {
             color: #aaaaaa;
@@ -45,11 +57,16 @@
             position: relative;
             box-shadow: inset 3px 3px 0 #8b8b8b;
             cursor: pointer;
-            transition: transform 0.1s;
+            transition: all 0.2s ease;
         }
         .barrel-card:hover {
-            background: #555555;
-            transform: scale(1.02);
+            background: #3a4455;
+            border-color: #55aaff;
+            box-shadow: 0 0 15px #55aaff, inset 3px 3px 0 #8b8b8b;
+            transform: scale(1.05);
+        }
+        .barrel-card:hover .barrel-number {
+            color: #55aaff;
         }
         .barrel-number {
             position: absolute;
@@ -59,6 +76,7 @@
             font-weight: bold;
             color: #aaaaaa;
             text-shadow: 1px 1px #000000;
+            transition: color 0.2s;
         }
         .barrel-icon img {
             width: 54px;
@@ -72,6 +90,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: opacity 0.2s;
         }
         .item-inside img {
             width: 40px;
@@ -80,16 +99,13 @@
             vertical-align: middle;
         }
         .barrel-card.highlighted {
-            border-color: #55ffff;
-            background: #3a5555;
-            box-shadow: 0 0 20px #55ffff, inset 3px 3px 0 #8b8b8b;
+            border-color: #ff5555 !important; 
+            background: #553a3a !important;
+            box-shadow: 0 0 25px #ff5555, inset 3px 3px 0 #8b8b8b !important;
             transform: scale(1.05);
         }
-        .barrel-card.highlighted:hover {
-            background: #446666;
-        }
         .barrel-card.highlighted .barrel-number {
-            color: #55ffff;
+            color: #ff5555;
         }
         .barrel-card.highlighted .item-inside {
             opacity: 1;
@@ -132,7 +148,10 @@
 </head>
 <body>
 
-    <h1>Склад товаров</h1>
+    <div class="logo-container">
+        <img src="MetalHub.png" alt="METAL HUB" class="main-logo">
+        <h1>Склад товаров</h1>
+    </div>
     <p id="status-message">Поиск вашей бочки...</p>
 
     <div class="barrel-grid">
@@ -226,5 +245,9 @@
     </script>
 </body>
 </html>
+
+
+
+
 
 

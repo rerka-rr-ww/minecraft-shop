@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Алмазная лавка</title>
+    <title>METAL HUB — Магазин снаряжения</title>
     <style>
         body {
             font-family: 'Courier New', Courier, monospace;
@@ -15,11 +15,23 @@
             padding: 40px;
             margin: 0;
         }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .main-logo {
+            width: 140px;
+            height: auto;
+            image-rendering: pixelated;
+            object-fit: contain;
+        }
         h1 {
             color: #55ffff;
             text-shadow: 2px 2px #005555;
             text-align: center;
-            margin-bottom: 30px;
+            margin: 0;
         }
         .shop-container {
             display: flex;
@@ -153,10 +165,12 @@
 </head>
 <body>
 
-    <h1>Магазин снаряжения</h1>
+    <div class="logo-container">
+        <img src="MetalHub.png" alt="METAL HUB" class="main-logo">
+        <h1>Магазин снаряжения</h1>
+    </div>
 
     <div class="shop-container">
-        <!-- Блок Брони -->
         <div>
             <div class="section-title">Броня</div>
             <div class="armor-column">
@@ -175,14 +189,13 @@
             </div>
         </div>
 
-        <!-- Блок Инструментов и Оружия -->
         <div>
             <div class="section-title">Оружие / Инструменты</div>
             <div class="tools-column">
                 <div class="icon-card" onclick="showPrice('<img src=\'sword.png.png\'>', 'Алмазный меч', '20 ар', 'sword')">
                     <img src="sword.png.png" alt="Меч">
                 </div>
-                <div class="icon-card" onclick="showPrice('<img src=\'pickaxe.png.png\'>', 'Алмазная кирка', '15 ар', 'pickaxe')">
+                <div class="icon-card" onclick="showPrice('<img src=\'pickaxe.png.png\'>', 'Алматная кирка', '15 ар', 'pickaxe')">
                     <img src="pickaxe.png.png" alt="Кирка">
                 </div>
                 <div class="icon-card" onclick="showPrice('<img src=\'axe.png.png\'>', 'Алмазный топор', '13 ар', 'axe')">
@@ -191,14 +204,13 @@
             </div>
         </div>
 
-        <!-- Блок Еды -->
         <div>
             <div class="section-title">Еда</div>
             <div class="food-column">
                 <div class="icon-card" onclick="showPrice('<img src=\'Golden_Apple_JE2_BE2.png\'>', 'Золотое яблоко', '64 ар', 'gapple')">
                     <img src="Golden_Apple_JE2_BE2.png" alt="Золотое яблоко">
                 </div>
-                <div class="icon-card" onclick="showPrice('<img src=\'Golden_Carrot_JE4_BE2.png\'>', 'Золотая морковь', '7 ар', 'carrot')">
+                <div class="icon-card" onclick="showPrice('<img src=\'Golden_Carrot_JE4_BE2.png\'>', 'Золотая морковь', '18 ар', 'carrot')">
                     <img src="Golden_Carrot_JE4_BE2.png" alt="Золотая морковь">
                 </div>
                 <div class="icon-card" onclick="showPrice('<img src=\'Steak_JE4_BE3.png\'>', 'Стейк', '5 ар', 'steak')">
@@ -239,6 +251,10 @@
     </script>
 </body>
 </html>
+
+
+
+
 
 
 
